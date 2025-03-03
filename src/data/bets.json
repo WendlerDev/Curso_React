@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "name": "30 Day Fitness Challenge",
+    "startDate": "2025-03-10",
+    "endDate": "2025-04-09",
+    "participants": [
+      {
+        "userId": 1,
+        "dailyActivities": [
+          {
+            "date": "2025-03-10",
+            "completedTasks": ["gym", "water"],
+            "forbiddenTasks": []
+          }
+        ],
+        "points": 2
+      },
+      {
+        "userId": 2,
+        "dailyActivities": [
+          {
+            "date": "2025-03-10",
+            "completedTasks": ["gym", "water"],
+            "forbiddenTasks": ["junkFood"]
+          }
+        ],
+        "points": 1
+      }
+    ],
+    "tasks": {
+      "positive": [
+        { "id": "gym", "name": "Went to the gym", "points": 1 },
+        { "id": "water", "name": "Drank 2 liters of water", "points": 1 },
+        { "id": "meditation", "name": "Meditated for 10 minutes", "points": 1 }
+      ],
+      "negative": [
+        { "id": "junkFood", "name": "Ate junk food", "points": -1 },
+        { "id": "lateNight", "name": "Stayed up past midnight", "points": -1 }
+      ]
+    }
+  }
+]

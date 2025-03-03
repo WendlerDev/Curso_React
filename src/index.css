@@ -1,0 +1,73 @@
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: #212529;
+  background-color: #f8f9fa;
+}
+
+/* Use system fonts for better performance */
+html, body, button, input, optgroup, select, textarea {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Prevent content jumping when scrollbars appear/disappear */
+html {
+  overflow-y: scroll;
+}
+
+/* Better focus styles for accessibility */
+:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Fix outline button hover states */
+.btn-outline-primary:hover, 
+.btn-outline-secondary:hover,
+.btn-outline-success:hover,
+.btn-outline-danger:hover {
+  color: #fff !important;
+}
+
+/* Improve checkbox appearance */
+.form-check-input:checked {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* Add smooth transitions */
+.btn, .card, .form-control, .nav-link {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Ensure Bootstrap components work well in dark mode if needed */
+@media (prefers-color-scheme: dark) {
+  .bg-light {
+    background-color: #343a40 !important;
+  }
+  
+  .text-dark {
+    color: #f8f9fa !important;
+  }
+}
