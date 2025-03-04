@@ -6,21 +6,20 @@ import { isAuthenticated } from '../utils/auth';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    // If user is already authenticated, redirect to home
     if (isAuthenticated()) {
       navigate('/home');
     }
   }, [navigate]);
-  
+
   return (
     <Layout>
       <div className="text-center mb-4">
-        <h1>Welcome to BetTracker</h1>
-        <p className="lead">Log in to track your daily challenges with friends</p>
+        <h1>Bem vindo ao BetTracker</h1>
+        <p className="lead">Aplicativo para rastreamento de apostas pessoais</p>
       </div>
-      
+
       <LoginForm />
     </Layout>
   );

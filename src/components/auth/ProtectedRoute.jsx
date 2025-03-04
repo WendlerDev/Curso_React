@@ -4,12 +4,12 @@ import { isAuthenticated } from '../../utils/auth';
 
 const ProtectedRoute = ({ children }) => {
   const authenticated = isAuthenticated();
-  
+
   if (!authenticated) {
-    // Redirect to login if not authenticated
+    // Redirect para a pagina de login
     return <Navigate to="/login" replace />;
   }
-  
+
   return children;
 };
 
