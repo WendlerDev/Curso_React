@@ -8,14 +8,14 @@ const NotFoundPage = () => {
     <Layout>
       <div className="text-center">
         <h1 className="display-1">404</h1>
-        <h2 className="mb-4">Page Not Found</h2>
-        
+        <h2 className="mb-4">Página não encontrada</h2>
+
         <Alert color="warning" className="mb-4">
-          The page you are looking for does not exist or has been moved.
+          Página que você procura não foi encontrada.
         </Alert>
-        
+
         <Button color="primary" tag={Link} to="/home">
-          Go Back to Home
+          Voltar para a home
         </Button>
       </div>
     </Layout>
