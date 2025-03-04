@@ -23,7 +23,7 @@ const Header = () => {
           {authenticated ? (
             <>
               <NavItem className="d-flex align-items-center text-light me-3">
-                Welcome, {currentUser?.name || 'User'}
+                Bem-vindo, {currentUser?.name || 'User'}
               </NavItem>
               <NavItem>
                 <Button color="light" outline onClick={handleLogout}>

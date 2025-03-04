@@ -9,38 +9,38 @@ import { getAllBets } from '../utils/betsService';
 const HomePage = () => {
   const [bets, setBets] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  
+
   useEffect(() => {
     // Load all bets
     const fetchBets = () => {
       const betsData = getAllBets();
       setBets(betsData);
     };
-    
+
     fetchBets();
   }, []);
-  
+
   return (
     <Layout>
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h1>Your Bets</h1>
-        <Button 
-          color="primary" 
+        <h1>Suas apostas</h1>
+        <Button
+          color="primary"
           onClick={() => setShowForm(!showForm)}
         >
-          {showForm ? 'Hide Form' : 'Create New Bet'}
+          {showForm ? 'Esconder' : 'Criar nova aposta'}
         </Button>
       </div>
-      
+
       {showForm && (
         <div className="mb-4">
           <BetForm />
         </div>
       )}
-      
+
       {bets.length === 0 ? (
         <Alert color="info">
-          You don't have any bets yet. Create your first bet to get started!
+          Você não tem apostas. Crie sua primeira aposta!
         </Alert>
       ) : (
         <Row>

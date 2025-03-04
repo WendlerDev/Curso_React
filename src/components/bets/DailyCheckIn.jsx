@@ -9,13 +9,13 @@ const DailyCheckIn = ({ bet, onActivityLogged }) => {
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  
+
   const currentUser = getCurrentUser();
-  
-  // Check if current user is a participant
+
+  // Checar se usuario é participante
   const isParticipant = bet.participants.some(p => p.userId === currentUser?.id);
-  
-  // Handle checkbox change for positive tasks
+
+  // Handle box para apostas positivas
   const handlePositiveTaskChange = (taskId) => {
     setCompletedTasks(prev => {
       if (prev.includes(taskId)) {
@@ -25,8 +25,8 @@ const DailyCheckIn = ({ bet, onActivityLogged }) => {
       }
     });
   };
-  
-  // Handle checkbox change for negative tasks
+
+  // Handle box para apostas negativas
   const handleNegativeTaskChange = (taskId) => {
     setForbiddenTasks(prev => {
       if (prev.includes(taskId)) {
@@ -36,22 +36,22 @@ const DailyCheckIn = ({ bet, onActivityLogged }) => {
       }
     });
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    
+
     if (!currentUser) {
-      setError('You must be logged in to check in');
+      setError('Você precisa estar logado');
       return;
     }
-    
+
     if (!isParticipant) {
-      setError('You are not a participant in this bet');
+      setError('Você não é um participante desta aposta');
       return;
     }
-    
+
     const result = logDailyActivity(
       bet.id,
       currentUser.id,
@@ -59,13 +59,13 @@ const DailyCheckIn = ({ bet, onActivityLogged }) => {
       completedTasks,
       forbiddenTasks
     );
-    
+
     if (result.success) {
-      setSuccess('Daily check-in recorded successfully!');
+      setSuccess('Aposta gravada com sucesso');
       setCompletedTasks([]);
       setForbiddenTasks([]);
-      
-      // Notify parent component that activity was logged
+
+
       if (onActivityLogged) {
         onActivityLogged(result.bet);
       }
@@ -73,32 +73,32 @@ const DailyCheckIn = ({ bet, onActivityLogged }) => {
       setError(result.message);
     }
   };
-  
-  // If user is not a participant, don't show the form
+
+  // se o usuario nao for participante, não mostrará o form
   if (!isParticipant) {
     return (
       <Card className="mb-4">
         <CardBody>
-          <CardTitle tag="h5">Daily Check-In</CardTitle>
+          <CardTitle tag="h5">Check diário</CardTitle>
           <Alert color="info">
-            You need to join this bet before you can check in daily activities.
+            Você precisa participar dessa aposta para poder fazer o check diário.
           </Alert>
         </CardBody>
       </Card>
     );
   }
-  
+
   return (
     <Card className="mb-4">
       <CardBody>
-        <CardTitle tag="h5">Daily Check-In</CardTitle>
-        
+        <CardTitle tag="h5">Check diário</CardTitle>
+
         {error && <Alert color="danger">{error}</Alert>}
         {success && <Alert color="success">{success}</Alert>}
-        
+
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <Label for="date">Date</Label>
+            <Label for="date">Data</Label>
             <Input
               type="date"
               id="date"
@@ -108,9 +108,9 @@ const DailyCheckIn = ({ bet, onActivityLogged }) => {
               max={bet.endDate}
             />
           </FormGroup>
-          
+
           <FormGroup tag="fieldset">
-            <legend className="small font-weight-bold">Positive Tasks (+1 point each)</legend>
+            <legend className="small font-weight-bold">Apostas positivas(+1 point each)</legend>
             {bet.tasks.positive.map(task => (
               <FormGroup check key={task.id}>
                 <Label check>
@@ -124,9 +124,9 @@ const DailyCheckIn = ({ bet, onActivityLogged }) => {
               </FormGroup>
             ))}
           </FormGroup>
-          
+
           <FormGroup tag="fieldset" className="mt-3">
-            <legend className="small font-weight-bold">Negative Tasks (-1 point each)</legend>
+            <legend className="small font-weight-bold">Apostas negativas(-1 point each)</legend>
             {bet.tasks.negative.map(task => (
               <FormGroup check key={task.id}>
                 <Label check>
@@ -140,9 +140,9 @@ const DailyCheckIn = ({ bet, onActivityLogged }) => {
               </FormGroup>
             ))}
           </FormGroup>
-          
+
           <Button color="primary" type="submit" className="mt-3">
-            Submit Check-In
+            Submeter check-in
           </Button>
         </Form>
       </CardBody>

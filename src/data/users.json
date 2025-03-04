@@ -1,20 +1,20 @@
 [
   {
     "id": 1,
-    "username": "user123",
-    "password": "pass123",
-    "name": "John Doe"
+    "username": "alex",
+    "password": "senha123",
+    "name": "Alexandre Silveira"
   },
   {
     "id": 2,
-    "username": "jane456",
-    "password": "pass456",
-    "name": "Jane Smith"
+    "username": "joaozito",
+    "password": "senha321",
+    "name": "Joao Silveira"
   },
   {
     "id": 3,
-    "username": "mike789",
-    "password": "pass789",
-    "name": "Mike Johnson"
+    "username": "fefafig",
+    "password": "pass123",
+    "name": "Fernando"
   }
 ]

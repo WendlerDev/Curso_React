@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="bg-dark text-light py-4 mt-5">
       <Container className="text-center">
-        <p className="mb-0">BetTracker &copy; {new Date().getFullYear()} - Track your daily challenges with friends</p>
+        <p className="mb-0">BetTracker &copy; {new Date().getFullYear()} - Um desafio com seus amigos</p>
       </Container>
     </footer>
   );

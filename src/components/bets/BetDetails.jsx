@@ -12,114 +12,115 @@ const BetDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    // Load bet data
+    // Carregar as bets
     const fetchBet = () => {
       try {
         const betData = getBetById(parseInt(id));
         if (betData) {
           setBet(betData);
         } else {
-          setError('Bet not found');
+          setError('Aposta não encontrada');
         }
+        // eslint-disable-next-line no-unused-vars
       } catch (err) {
-        setError('Failed to load bet details');
+        setError('Falha ao carregar dados');
       } finally {
         setLoading(false);
       }
     };
-    
+
     fetchBet();
   }, [id]);
-  
+
   const handleParticipantAdded = (updatedBet) => {
-    // Update local state with the updated bet data
+    // Update local state com os dados das apostas
     setBet(updatedBet);
   };
-  
+
   const handleActivityLogged = (updatedBet) => {
-    // Update local state with the updated bet data
+    // Update local state com os dados das apostas
     setBet(updatedBet);
   };
-  
+
   if (loading) {
-    return <div className="text-center py-5">Loading bet details...</div>;
+    return <div className="text-center py-5">Carregando as apostas...</div>;
   }
-  
+
   if (error) {
     return (
       <Alert color="danger" className="my-4">
         {error}
         <div className="mt-3">
           <Button color="secondary" onClick={() => navigate('/home')}>
-            Back to Home
+            BVoltar para a home
           </Button>
         </div>
       </Alert>
     );
   }
-  
+
   if (!bet) {
     return (
       <Alert color="warning" className="my-4">
-        Bet not found
+        Aposta não encontrada
         <div className="mt-3">
           <Button color="secondary" onClick={() => navigate('/home')}>
-            Back to Home
+            Voltar para home
           </Button>
         </div>
       </Alert>
     );
   }
-  
+
   const startDate = new Date(bet.startDate).toLocaleDateString();
   const endDate = new Date(bet.endDate).toLocaleDateString();
   const isActive = new Date() >= new Date(bet.startDate) && new Date() <= new Date(bet.endDate);
-  
+
   return (
     <div>
       <Card className="mb-4">
         <CardBody>
           <CardTitle tag="h3">{bet.name}</CardTitle>
-          
+
           <CardText className="mb-1">
-            <strong>Duration:</strong> {startDate} to {endDate}
+            <strong>Duração:</strong> {startDate} to {endDate}
           </CardText>
-          
+
           <CardText className="mb-1">
             <strong>Status:</strong>{' '}
             <span className={isActive ? 'text-success' : 'text-secondary'}>
               {isActive ? 'Active' : 'Inactive'}
             </span>
           </CardText>
-          
+
           <CardText className="mb-1">
-            <strong>Participants:</strong> {bet.participants.length}
+            <strong>Participantes:</strong> {bet.participants.length}
           </CardText>
-          
+
           <div className="mt-3">
             <Button color="secondary" onClick={() => navigate('/home')}>
-              Back to Home
+              Voltar para a home
             </Button>
           </div>
         </CardBody>
       </Card>
-      
+
       <Row>
         <Col md={6}>
-          <ParticipantForm 
-            betId={bet.id} 
-            onParticipantAdded={handleParticipantAdded} 
+          <ParticipantForm
+            betId={bet.id}
+            onParticipantAdded={handleParticipantAdded}
           />
-          
+
           <ParticipantsList bet={bet} />
         </Col>
-        
+
         <Col md={6}>
-          <DailyCheckIn 
-            bet={bet} 
-            onActivityLogged={handleActivityLogged} 
+          <DailyCheckIn
+            bet={bet}
+            onActivityLogged={handleActivityLogged}
           />
         </Col>
       </Row>

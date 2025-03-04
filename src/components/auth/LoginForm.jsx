@@ -9,75 +9,75 @@ const LoginForm = () => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
-    
-    // Form validation
+
+    // Form validacao
     if (!username.trim() || !password.trim()) {
       setError('Please enter both username and password');
       return;
     }
-    
+
     setIsSubmitting(true);
-    
-    // Authenticate user
+
+    // Autenticacao de usuario
     const result = authenticateUser(username, password);
-    
+
     if (result.success) {
-      // Redirect to home page on successful login
+      // Redirect para login
       navigate('/home');
     } else {
       setError(result.message);
       setIsSubmitting(false);
     }
   };
-  
+
   return (
     <Card className="mx-auto" style={{ maxWidth: '400px' }}>
       <CardBody>
-        <CardTitle tag="h4" className="text-center mb-4">Login to BetTracker</CardTitle>
-        
+        <CardTitle tag="h4" className="text-center mb-4">Faca o login em BetTracker</CardTitle>
+
         {error && <Alert color="danger">{error}</Alert>}
-        
+
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <Label for="username">Username</Label>
+            <Label for="username">Usuario</Label>
             <Input
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your username"
+              placeholder="Entre seu usuario"
               required
             />
           </FormGroup>
-          
+
           <FormGroup>
-            <Label for="password">Password</Label>
+            <Label for="password">Senha</Label>
             <Input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder="Coloque sua senha"
               required
             />
           </FormGroup>
-          
+
           <Button
             color="primary"
             block
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Logging in...' : 'Login'}
+            {isSubmitting ? 'Logando...' : 'Login'}
           </Button>
-          
+
           <div className="mt-3 text-center">
             <small className="text-muted">
-              Try username: user123, password: pass123
+              Tente: user123, senha: pass123
             </small>
           </div>
         </Form>

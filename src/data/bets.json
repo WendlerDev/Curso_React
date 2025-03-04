@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "name": "30 Day Fitness Challenge",
+    "name": "Desafio dos 30 dias",
     "startDate": "2025-03-10",
     "endDate": "2025-04-09",
     "participants": [
@@ -10,7 +10,7 @@
         "dailyActivities": [
           {
             "date": "2025-03-10",
-            "completedTasks": ["gym", "water"],
+            "completedTasks": ["Academia", "Agua"],
             "forbiddenTasks": []
           }
         ],
@@ -21,7 +21,7 @@
         "dailyActivities": [
           {
             "date": "2025-03-10",
-            "completedTasks": ["gym", "water"],
+            "completedTasks": ["Academia", "Agua"],
             "forbiddenTasks": ["junkFood"]
           }
         ],
@@ -30,13 +30,21 @@
     ],
     "tasks": {
       "positive": [
-        { "id": "gym", "name": "Went to the gym", "points": 1 },
-        { "id": "water", "name": "Drank 2 liters of water", "points": 1 },
-        { "id": "meditation", "name": "Meditated for 10 minutes", "points": 1 }
+        { "id": "Academia", "name": "Treinou no dia", "points": 1 },
+        { "id": "agua", "name": "Dois litros de agua tomado", "points": 1 },
+        { "id": "Meditacao", "name": "Meditou por 10 minutos", "points": 1 }
       ],
       "negative": [
-        { "id": "junkFood", "name": "Ate junk food", "points": -1 },
-        { "id": "lateNight", "name": "Stayed up past midnight", "points": -1 }
+        {
+          "id": "Fruto proibido",
+          "name": "Comeu o fruto proibido ou junkfood",
+          "points": -1
+        },
+        {
+          "id": "Dormiu tarde",
+          "name": "Dormiu apos a meia noite",
+          "points": -1
+        }
       ]
     }
   }

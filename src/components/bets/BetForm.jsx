@@ -12,15 +12,15 @@ const BetForm = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBetData(prev => ({
       ...prev,
       [name]: value
     }));
-    
-    // Clear error when field is edited
+
+    // Limpar erro ao editar o campo
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -28,73 +28,74 @@ const BetForm = () => {
       }));
     }
   };
-  
+
   const validate = () => {
     const newErrors = {};
     const today = new Date().toISOString().split('T')[0];
-    
+
     if (!betData.name.trim()) {
-      newErrors.name = 'Bet name is required';
+      newErrors.name = 'Nome da aposta requerida';
     }
-    
+
     if (!betData.startDate) {
-      newErrors.startDate = 'Start date is required';
+      newErrors.startDate = 'Data de início requerida';
     } else if (betData.startDate < today) {
-      newErrors.startDate = 'Start date cannot be in the past';
+      newErrors.startDate = 'Data não pode estar no passado';
     }
-    
+
     if (!betData.endDate) {
-      newErrors.endDate = 'End date is required';
+      newErrors.endDate = 'Data final requerida';
     } else if (betData.endDate <= betData.startDate) {
-      newErrors.endDate = 'End date must be after start date';
+      newErrors.endDate = 'Data final deve ser depois da data inicial';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!validate()) {
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
       const newBet = createBet(betData);
       navigate(`/bet/${newBet.id}`);
+      // eslint-disable-next-line no-unused-vars
     } catch (error) {
-      setErrors({ form: 'Failed to create bet. Please try again.' });
+      setErrors({ form: 'Falha ao criar aposta, tente novamente.' });
       setIsSubmitting(false);
     }
   };
-  
+
   return (
     <Card>
       <CardBody>
-        <CardTitle tag="h4" className="mb-4">Create New Bet</CardTitle>
-        
+        <CardTitle tag="h4" className="mb-4">Criar nova aposta</CardTitle>
+
         {errors.form && <Alert color="danger">{errors.form}</Alert>}
-        
+
         <Form onSubmit={handleSubmit}>
           <FormGroup>
-            <Label for="name">Bet Name</Label>
+            <Label for="name">Nome da aposta</Label>
             <Input
               type="text"
               id="name"
               name="name"
               value={betData.name}
               onChange={handleChange}
-              placeholder="e.g., 30 Day Fitness Challenge"
+              placeholder="e.g., Desafio dos 30 dias"
               invalid={!!errors.name}
             />
             {errors.name && <div className="text-danger small">{errors.name}</div>}
           </FormGroup>
-          
+
           <FormGroup>
-            <Label for="startDate">Start Date</Label>
+            <Label for="startDate">Data inicial</Label>
             <Input
               type="date"
               id="startDate"
@@ -105,9 +106,9 @@ const BetForm = () => {
             />
             {errors.startDate && <div className="text-danger small">{errors.startDate}</div>}
           </FormGroup>
-          
+
           <FormGroup>
-            <Label for="endDate">End Date</Label>
+            <Label for="endDate">Data final</Label>
             <Input
               type="date"
               id="endDate"
@@ -118,13 +119,13 @@ const BetForm = () => {
             />
             {errors.endDate && <div className="text-danger small">{errors.endDate}</div>}
           </FormGroup>
-          
+
           <Button
             color="primary"
             type="submit"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Creating...' : 'Create Bet'}
+            {isSubmitting ? 'Criando...' : 'Aposta criada'}
           </Button>
         </Form>
       </CardBody>

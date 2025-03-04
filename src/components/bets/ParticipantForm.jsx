@@ -10,35 +10,35 @@ const ParticipantForm = ({ betId, onParticipantAdded }) => {
   const [success, setSuccess] = useState('');
   const [availableUsers, setAvailableUsers] = useState([]);
   const currentUser = getCurrentUser();
-  
+
   useEffect(() => {
-    // Set current user as default selected user
+    // Set usuario como default
     if (currentUser) {
       setUserId(currentUser.id.toString());
     }
-    
-    // Filter out users that might already be in the bet
-    // In a real app, this would come from an API
+
+    // Filtrar usuarios que já estão na aposta
+    // aqui seria uma conexao com api
     setAvailableUsers(users);
   }, []);
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
-    
+
     if (!userId) {
-      setError('Please select a user');
+      setError('Selecione um usuário');
       return;
     }
-    
+
     const result = addParticipantToBet(betId, parseInt(userId));
-    
+
     if (result.success) {
-      setSuccess('Participant added successfully!');
+      setSuccess('Participante adicionado com sucesso');
       setUserId('');
-      
-      // Notify parent component that a participant was added
+
+      // Notificar participante adicionado
       if (onParticipantAdded) {
         onParticipantAdded(result.bet);
       }
@@ -46,14 +46,14 @@ const ParticipantForm = ({ betId, onParticipantAdded }) => {
       setError(result.message);
     }
   };
-  
+
   return (
     <div className="mb-4">
-      <h5>Add Participant</h5>
-      
+      <h5>Adicionar participante</h5>
+
       {error && <Alert color="danger">{error}</Alert>}
       {success && <Alert color="success">{success}</Alert>}
-      
+
       <Form onSubmit={handleSubmit} inline>
         <FormGroup className="mb-2 mr-2">
           <Label for="userId" className="mr-2">Select User</Label>
@@ -63,15 +63,15 @@ const ParticipantForm = ({ betId, onParticipantAdded }) => {
             value={userId}
             onChange={(e) => setUserId(e.target.value)}
           >
-            <option value="">Select a user...</option>
+            <option value="">Selecione...</option>
             {availableUsers.map(user => (
               <option key={user.id} value={user.id}>{user.name}</option>
             ))}
           </Input>
         </FormGroup>
-        
+
         <Button color="primary" type="submit" className="ml-2">
-          Add to Bet
+          Adicionar a aposta
         </Button>
       </Form>
     </div>
